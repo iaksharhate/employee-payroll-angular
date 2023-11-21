@@ -1,0 +1,251 @@
+<div class="form-content">
+  <form class="form">
+    <div class="form-head">Employee Payroll Form</div>
+
+    <div class="row-content">
+      <label class="label-text-name" for="name">Full Name </label>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Full Name</mat-label>
+        <input type="name" class="name-input" matInput formControlName="name" />
+      </mat-form-field>
+    </div>
+
+    <div class="row-content">
+      <label class="label text" for="profile">Profile Image </label>
+      <div class="profile-radio-content">
+        <mat-radio-group ngDefaultControl formControlName="profilePic">
+          <mat-radio-button
+            class="profile-width"
+            id="profile1"
+            name="profile"
+            color="primary"
+            value="../../../assets/Profile-Images/Ellipse -01.png"
+            required
+          >
+            <img
+              class="profile"
+              id="image1"
+              src="../../../assets/Profile-Images/Ellipse -01.png"
+            />
+          </mat-radio-button>
+          <mat-radio-button
+            class="profile-width"
+            id="profile2"
+            name="profile"
+            color="primary"
+            value="../../../assets/Profile-Images/Ellipse -02.png"
+            required
+          >
+            <img
+              class="profile"
+              id="image2"
+              src="../../../assets/Profile-Images/Ellipse -02.png"
+            />
+          </mat-radio-button>
+          <mat-radio-button
+            class="profile-width"
+            id="profile3"
+            name="profile"
+            color="primary"
+            value="../../../assets/Profile-Images/Ellipse -03.png"
+            required
+          >
+            <img
+              class="profile"
+              id="image3"
+              src="../../../assets/Profile-Images/Ellipse -03.png"
+            />
+          </mat-radio-button>
+          <mat-radio-button
+            class="profile-width"
+            id="profile4"
+            name="profile"
+            color="primary"
+            value="../../../assets/Profile-Images/Ellipse -04.png"
+            required
+          >
+            <img
+              class="profile"
+              id="image4"
+              src="../../../assets/Profile-Images/Ellipse -04.png"
+            />
+          </mat-radio-button>
+          <mat-radio-button
+            class="profile-width"
+            id="profile5"
+            name="profile"
+            color="primary"
+            value="../../../assets/Profile-Images/Ellipse -05.png"
+            required
+          >
+            <img
+              class="profile"
+              id="image5"
+              src="../../../assets/Profile-Images/Ellipse -05.png"
+            />
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <div class="row-content">
+      <label class="label text" for="gender">Gender</label>
+      <div>
+        <mat-radio-group ngDefaultControl formControlName="gender">
+          <mat-radio-button
+            type="radio"
+            id="male"
+            name="gender"
+            color="primary"
+            value="male"
+            required
+          >
+            <label class="text" for="male">Male</label>
+          </mat-radio-button>
+          <mat-radio-button
+            type="radio"
+            id="female"
+            name="gender"
+            color="primary"
+            value="female"
+            required
+          >
+            <label class="text" for="female">Female</label>
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <div class="row-content">
+      <label class="label text" for="depatment">Department</label>
+      <div>
+        <mat-checkbox
+          formControlName="department"
+          #checkbox
+          class="checkbox"
+          type="checkbox"
+          color="primary"
+          value="HR"
+        >
+          <label class="text">HR</label>
+        </mat-checkbox>
+      </div>
+      <div>
+        <mat-checkbox
+          #checkbox
+          formControlName="department"
+          class="checkbox"
+          type="checkbox"
+          color="primary"
+          value="Finance"
+        >
+          <label class="text">Finance</label>
+        </mat-checkbox>
+      </div>
+      <div>
+        <mat-checkbox
+          #checkbox
+          formControlName="department"
+          class="checkbox"
+          type="checkbox"
+          color="primary"
+          value="Engineer"
+        >
+          <label class="text">Engineer</label>
+        </mat-checkbox>
+      </div>
+      <div>
+        <mat-checkbox
+          #checkbox
+          formControlName="department"
+          class="checkbox"
+          type="checkbox"
+          color="primary"
+          value="Sales"
+        >
+          <label class="text">Sales</label>
+        </mat-checkbox>
+      </div>
+      <div>
+        <mat-checkbox
+          #checkbox
+          formControlName="department"
+          class="checkbox"
+          type="checkbox"
+          color="primary"
+          value="Other"
+        >
+          <label class="text">Other</label>
+        </mat-checkbox>
+      </div>
+    </div>
+
+    <div class="row-content">
+      <label class="label text" for="salary">Salary </label>
+      <mat-slider
+        class="salary-input"
+        #salaryOutput
+        thumbLabel
+        min="300000"
+        max="500000"
+        aria-label="units"
+        step="1000"
+        discrete
+        formControlName="salary"
+      >
+        <input matSliderThumb />
+      </mat-slider>
+    </div>
+
+    <div class="row-content">
+      <label class="label text" for="startDate"> Start Date </label>
+      <mat-form-field>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          placeholder="Choose a date"
+          formControlName="startDate"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="row-content">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Notes</mat-label>
+        <textarea
+          matInput
+          id="notes"
+          class="input"
+          name="Notes"
+          placeholder="Write the Note"
+          style="height: 100px"
+          formControlName="note"
+          required
+        ></textarea>
+      </mat-form-field>
+    </div>
+
+    <div class="buttonParent">
+      <a routerLink="/home">
+        <button mat-raised-button class="resetButton button cancelButton">
+          Cancel
+        </button>
+      </a>
+      <div class="submit-reset">
+        <button
+          mat-raised-button
+          type="submit"
+          class="button submitButton"
+          id="submitButton"
+        >
+          Submit
+        </button>
+        <button mat-raised-button type="reset" class="resetButton button">
+          Reset
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
