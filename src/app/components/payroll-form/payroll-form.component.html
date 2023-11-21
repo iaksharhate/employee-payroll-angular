@@ -1,11 +1,10 @@
 <div class="form-content">
-  <form class="form">
+  <form class="form" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
     <div class="form-head">Employee Payroll Form</div>
 
     <div class="row-content">
       <label class="label-text-name" for="name">Full Name </label>
       <mat-form-field class="example-full-width" appearance="outline">
-        <mat-label>Full Name</mat-label>
         <input type="name" class="name-input" matInput formControlName="name" />
       </mat-form-field>
     </div>
@@ -97,7 +96,7 @@
             id="male"
             name="gender"
             color="primary"
-            value="male"
+            value="Male"
             required
           >
             <label class="text" for="male">Male</label>
@@ -107,7 +106,7 @@
             id="female"
             name="gender"
             color="primary"
-            value="female"
+            value="Female"
             required
           >
             <label class="text" for="female">Female</label>
@@ -117,6 +116,16 @@
     </div>
 
     <div class="row-content">
+      <label class="label text" for="depatment">Department</label>
+      <div *ngFor="let department of departments">
+        <mat-checkbox #checkbox class="checkbox" type="checkbox" color="primary" [value]="department.value"
+          (change)="onDepartmentChange($event)" [checked]="department.checked">
+          <label>{{department.name}}</label>
+        </mat-checkbox>
+      </div>
+    </div>
+
+    <!-- <div class="row-content">
       <label class="label text" for="depatment">Department</label>
       <div>
         <mat-checkbox
@@ -178,7 +187,7 @@
           <label class="text">Other</label>
         </mat-checkbox>
       </div>
-    </div>
+    </div> -->
 
     <div class="row-content">
       <label class="label text" for="salary">Salary </label>
@@ -191,9 +200,9 @@
         aria-label="units"
         step="1000"
         discrete
-        formControlName="salary"
+        (change)="updateSalary($event)"
       >
-        <input matSliderThumb />
+        <input matSliderThumb value="salary" formControlName="salary"/>
       </mat-slider>
     </div>
 

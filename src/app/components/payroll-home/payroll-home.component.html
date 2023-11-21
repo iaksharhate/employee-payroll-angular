@@ -2,7 +2,7 @@
   <div class="header-content">
     <div class="emp-detail-text">
       Employee Details
-      <div class="emp-count">1</div>
+      <div class="emp-count">{{employeeList.length}}</div>
     </div>
     <a class="add-button" routerLink="/form">
       <img src="../../../assets/Icons/add-24px.svg" alt="" />Add User</a
@@ -20,21 +20,21 @@
         <th>Start Date</th>
         <th>Actions</th>
       </tr>
-      <tr>
+      <tr *ngFor="let employee of employeeList">
         <td>
           <img
             class="profile"
-            src="../../../assets/Profile-Images/Ellipse -03.png"
+            src={{employee.profilePic}}
             alt=""
           />
         </td>
-        <td>Akshar Hate</td>
-        <td>Male</td>
+        <td>{{employee.name}}</td>
+        <td>{{employee.gender}}</td>
         <td>
-          <div class="dept-label">Engineer</div>
+          <div class="dept-label">{{employee.department}}</div>
         </td>
-        <td>200000</td>
-        <td>20 Jan 2023</td>
+        <td>{{employee.salary}}</td>
+        <td>{{employee.startDate | date}}</td>
         <td>
           <img src="../../../assets/Icons/delete-black-18dp.svg" alt="delete" />
           &nbsp;

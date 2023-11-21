@@ -8,6 +8,7 @@ import { AngularMaterialModule } from './angular-material/angular-material.modul
 import { HeaderComponent } from './components/header/header.component';
 import { PayrollFormComponent } from './components/payroll-form/payroll-form.component';
 import { PayrollHomeComponent } from './components/payroll-home/payroll-home.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PayrollHomeComponent } from './components/payroll-home/payroll-home.com
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
