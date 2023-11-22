@@ -9,6 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { PayrollFormComponent } from './components/payroll-form/payroll-form.component';
 import { PayrollHomeComponent } from './components/payroll-home/payroll-home.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

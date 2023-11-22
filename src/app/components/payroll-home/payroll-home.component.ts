@@ -1,19 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Employee } from 'src/app/model/employee';
+import { PayrollService } from 'src/app/service/payroll.service';
+
 
 @Component({
   selector: 'app-payroll-home',
   templateUrl: './payroll-home.component.html',
   styleUrls: ['./payroll-home.component.scss'],
 })
-export class PayrollHomeComponent {
+export class PayrollHomeComponent implements OnInit{
+  employeeCount: number = 0;
   employeeList: Employee[] = [];
 
-  constructor() {
-    const localStorageData = localStorage.getItem('Employees');
-    if (localStorageData) {
-      this.employeeList = JSON.parse(localStorageData);
-    }
+  constructor(private payrollService: PayrollService) {
+    // const localStorageData = localStorage.getItem('Employees');
+    // if (localStorageData) {
+    //   this.employeeList = JSON.parse(localStorageData);
+    // }
+  }
+
+  ngOnInit(): void {
+    this.payrollService.getAllEmployee().subscribe(response => {
+      console.log(response.data);
+      this.employeeList = response.data;
+    })
   }
 
   handleDelete = (name: string) => {
