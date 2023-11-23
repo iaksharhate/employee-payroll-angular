@@ -15,4 +15,8 @@ export class PayrollService {
   getAllEmployee(): Observable<any>{
     return this.httpClient.get(`${this.BASE_URL}/get`)
   }
+
+  addEmployee(data:Employee): Observable<any>{
+    return this.httpClient.post(`${this.BASE_URL}/create`, data)
+  }
 }

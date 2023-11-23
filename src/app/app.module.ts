@@ -16,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     HeaderComponent,
     PayrollFormComponent,
-    PayrollHomeComponent,
+    PayrollHomeComponent
   ],
   imports: [
     BrowserModule,

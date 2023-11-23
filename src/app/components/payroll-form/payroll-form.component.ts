@@ -8,9 +8,11 @@ import {
 } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { enableDebugTools } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { Employee } from 'src/app/model/employee';
+import { PayrollService } from 'src/app/service/payroll.service';
 
 @Component({
   selector: 'app-payroll-form',
@@ -57,7 +59,8 @@ export class PayrollFormComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private payrollService: PayrollService
   ) {
     this.employeeForm = this.formBuilder.group({
       name: new FormControl('', []),
@@ -85,13 +88,6 @@ export class PayrollFormComponent {
     }
   }
 
-  salary: number = 400000;
-
-  updateSalary(event: any) {
-    this.salary = event.target.value;
-    console.log(this.salary);
-  }
-
   onSubmit() {
     if (this.employeeForm.invalid) {
       if (this.employeeForm.get('profilePic')?.untouched) {
@@ -113,17 +109,30 @@ export class PayrollFormComponent {
         });
       }
     } else {
-      this.employee.id = Math.floor(Math.random())
-      this.employee = this.employeeForm.value;
-      console.log(this.employee);
-      let employeeList = [];
-      const isEmployeeData = localStorage.getItem('Employees');
-      if (isEmployeeData) {
-        employeeList = JSON.parse(isEmployeeData);
+      this.employee.name = this.employeeForm.get('name')?.value;
+      this.employee.profilePic = this.employeeForm.get('profilePic')?.value;
+      this.employee.gender = this.employeeForm.get('gender')?.value;
+      this.employee.department = this.employeeForm.get('department')?.value;
+      this.employee.salary = this.employeeForm.get('salary')?.value;
+      this.employee.note = this.employeeForm.get('note')?.value;
+
+      let date = this.employeeForm.get('startDate')?.value;
+      console.log('date', date);
+      if (date) {
+        const formatedDate = new Date(date).toLocaleDateString('en-US', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+        });
+        this.employee.startDate = formatedDate;
+        console.log(formatedDate);
       }
-      employeeList.push(this.employee);
-      localStorage.setItem('Employees', JSON.stringify(employeeList));
-      this.router.navigateByUrl('/home')
+      console.log(this.employee);
+
+      this.payrollService.addEmployee(this.employee).subscribe((response) => {
+        alert(response.message);
+      });
+      this.router.navigateByUrl('/home');
     }
   }
 }

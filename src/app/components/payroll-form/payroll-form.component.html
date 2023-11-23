@@ -200,11 +200,25 @@
         aria-label="units"
         step="1000"
         discrete
-        (change)="updateSalary($event)"
+        
       >
         <input matSliderThumb value="salary" formControlName="salary"/>
       </mat-slider>
     </div>
+
+    <!-- <div class="row-content">
+      <label class="label text" for="startDate"> Start Date </label>
+      <mat-form-field>
+        <input
+          
+          type="date"
+          placeholder="Choose a date"
+          formControlName="startDate"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div> -->
 
     <div class="row-content">
       <label class="label text" for="startDate"> Start Date </label>
