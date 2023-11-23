@@ -19,4 +19,8 @@ export class PayrollService {
   addEmployee(data:Employee): Observable<any>{
     return this.httpClient.post(`${this.BASE_URL}/create`, data)
   }
+
+  deleteEmployee(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.BASE_URL}/delete/${id}`)
+  }
 }
