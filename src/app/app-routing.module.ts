@@ -6,7 +6,8 @@ import { PayrollHomeComponent } from './components/payroll-home/payroll-home.com
 const routes: Routes = [
   { path: '', redirectTo:'home', pathMatch:'full' },
   { path: 'home', component: PayrollHomeComponent },
-  { path: 'form', component: PayrollFormComponent }
+  { path: 'form', component: PayrollFormComponent },
+  { path: 'form/:id', component: PayrollFormComponent }
 ];
 
 @NgModule({

@@ -2,13 +2,13 @@
   <div class="header-content">
     <div class="emp-detail-text">
       Employee Details
-      <div class="emp-count">{{employeeList.length}}</div>
+      <div class="emp-count">{{ employeeList.length }}</div>
     </div>
     <a class="add-button" routerLink="/form">
       <img src="../../../assets/Icons/add-24px.svg" alt="" />Add User</a
     >
   </div>
-  
+
   <div class="table-main">
     <table id="table-display" class="table">
       <tr>
@@ -22,23 +22,29 @@
       </tr>
       <tr *ngFor="let employee of employeeList">
         <td>
+          <img class="profile" src="{{ employee.profilePic }}" alt="" />
+        </td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.gender }}</td>
+        <td>
+          <!-- <div style="display: flex; flex-direction: row; flex-wrap:wrap;" *ngFor="let department; of: employee.department"> -->
+            <div class="dept-label">{{ employee.department }}</div>
+          <!-- </div> -->
+        </td>
+        <td>{{ employee.salary }}</td>
+        <td>{{ employee.startDate | date }}</td>
+        <td>
           <img
-            class="profile"
-            src={{employee.profilePic}}
-            alt=""
+            src="../../../assets/Icons/delete-black-18dp.svg"
+            alt="delete"
+            (click)="handleDelete(employee.id)"
           />
-        </td>
-        <td>{{employee.name}}</td>
-        <td>{{employee.gender}}</td>
-        <td>
-          <div class="dept-label">{{employee.department}}</div>
-        </td>
-        <td>{{employee.salary}}</td>
-        <td>{{employee.startDate | date}}</td>
-        <td>
-          <img src="../../../assets/Icons/delete-black-18dp.svg" alt="delete" (click)="handleDelete(employee.id)" />
           &nbsp;
-          <img src="../../../assets/Icons/create-black-18dp.svg" alt="edit" />
+          <img
+            src="../../../assets/Icons/create-black-18dp.svg"
+            alt="edit"
+            (click)="handleUpdate(employee)"
+          />
         </td>
       </tr>
     </table>

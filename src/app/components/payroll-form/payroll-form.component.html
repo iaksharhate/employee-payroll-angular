@@ -200,9 +200,9 @@
         aria-label="units"
         step="1000"
         discrete
-        
+        (change)="updateSalary($event)"
       >
-        <input matSliderThumb value="salary" formControlName="salary"/>
+        <input matSliderThumb formControlName="salary"/>
       </mat-slider>
     </div>
 

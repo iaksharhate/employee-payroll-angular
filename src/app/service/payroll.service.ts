@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Employee } from '../model/employee';
 import { Observable } from 'rxjs';
+import { Response } from '../model/response';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,19 @@ export class PayrollService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllEmployee(): Observable<any>{
-    return this.httpClient.get(`${this.BASE_URL}/get`)
+  getAllEmployee(){
+    return this.httpClient.get(`${this.BASE_URL}/get`);
   }
 
-  addEmployee(data:Employee): Observable<any>{
-    return this.httpClient.post(`${this.BASE_URL}/create`, data)
+  addEmployee(data:Employee){
+    return this.httpClient.post(`${this.BASE_URL}/create`, data);
   }
 
-  deleteEmployee(id: number): Observable<any> {
-    return this.httpClient.delete(`${this.BASE_URL}/delete/${id}`)
+  updateEmployee(id:number, data: Employee){
+    return this.httpClient.put(`${this.BASE_URL}/update/${id}`, data);
+  }
+
+  deleteEmployee(id: number){
+    return this.httpClient.delete(`${this.BASE_URL}/delete/${id}`);
   }
 }

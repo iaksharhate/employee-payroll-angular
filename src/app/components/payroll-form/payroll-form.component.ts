@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -8,9 +8,11 @@ import {
 } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Employee } from 'src/app/model/employee';
+import { Response } from 'src/app/model/response';
+import { DataService } from 'src/app/service/data.service';
 import { PayrollService } from 'src/app/service/payroll.service';
 
 @Component({
@@ -18,7 +20,7 @@ import { PayrollService } from 'src/app/service/payroll.service';
   templateUrl: './payroll-form.component.html',
   styleUrls: ['./payroll-form.component.scss'],
 })
-export class PayrollFormComponent {
+export class PayrollFormComponent implements OnInit {
   departments: Array<any> = [
     {
       id: 1,
@@ -59,17 +61,51 @@ export class PayrollFormComponent {
     private formBuilder: FormBuilder,
     private router: Router,
     private snackBar: MatSnackBar,
-    private payrollService: PayrollService
+    private activateRoute: ActivatedRoute,
+    private payrollService: PayrollService,
+    private dataService: DataService
   ) {
     this.employeeForm = this.formBuilder.group({
       name: new FormControl('', []),
       profilePic: new FormControl('', []),
       gender: new FormControl('', []),
       department: this.formBuilder.array([], [Validators.required]),
-      salary: new FormControl('', []),
+      salary: new FormControl(300000, []),
       startDate: new FormControl('', []),
-      note: new FormControl('', []),
+      note: ['', []],
     });
+  }
+
+  
+
+  ngOnInit(): void {
+
+    
+    console.log('ngOnInIt')
+    if (this.activateRoute.snapshot.params['id'] != undefined) {
+      this.dataService.currentEmployee.subscribe((employee) => {
+        if (Object.keys(employee).length !== 0) {
+          console.log(employee);
+          this.employeeForm.get('name')?.setValue(employee.name);
+          this.employeeForm.get('profilePic')?.setValue(employee.profilePic);
+          this.employeeForm.get('gender')?.setValue(employee.gender);
+          this.employeeForm.get('salary')?.setValue(+employee.salary);
+          this.employeeForm.get('startDate')?.setValue(employee.startDate);
+          this.employeeForm.get('note')?.setValue(employee.note);
+          const department: FormArray = this.employeeForm.get(
+            'department'
+          ) as FormArray;
+          employee.department.forEach((deptElement) => {
+            for (let i = 0; i < this.departments.length; i++) {
+              if (this.departments[i].name === deptElement) {
+                this.departments[i].checked = true;
+                department.push(new FormControl(this.departments[i].value));
+              }
+            }
+          });
+        }
+      });
+    }
   }
 
   onDepartmentChange(event: MatCheckboxChange) {
@@ -85,6 +121,12 @@ export class PayrollFormComponent {
       );
       department.removeAt(index);
     }
+  }
+
+  salary: string = this.activateRoute.snapshot.params['id'] ? this.employee.salary : "400000";
+  updateSalary(event: any) {
+    this.salary = event.target.value;
+    console.log(this.salary);
   }
 
   onSubmit() {
@@ -128,10 +170,21 @@ export class PayrollFormComponent {
       }
       console.log(this.employee);
 
-      this.payrollService.addEmployee(this.employee).subscribe((response) => {
-        alert(response.message);
-      });
-      this.router.navigateByUrl('/home');
+      if (this.activateRoute.snapshot.params['id'] != undefined) {
+        this.payrollService
+          .updateEmployee(
+            this.activateRoute.snapshot.params['id'],
+            this.employee
+          )
+          .subscribe((response: Response) => {
+            console.log(response.data);
+            this.router.navigateByUrl('/home');
+          });
+      } else {
+        this.payrollService.addEmployee(this.employee).subscribe((response: Response) => {
+          this.router.navigateByUrl('/home');
+        });
+      }
     }
   }
 }

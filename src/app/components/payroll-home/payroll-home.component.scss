@@ -2,12 +2,12 @@ $color-white: #fff;
 $button-background-color: #82a70c;
 
 .main-content {
-  display:flex;
+  display: flex;
   flex-direction: column;
-  min-height:calc(100vh - 80px);
+  min-height: calc(100vh - 80px);
   background-color: #f7f7f7;
-  padding:30px 0 10px;
-  box-sizing:border-box;
+  padding: 30px 0 10px;
+  box-sizing: border-box;
 
   .header-content {
     display: flex;
@@ -27,13 +27,13 @@ $button-background-color: #82a70c;
   }
 
   .emp-count {
-    background-color:$button-background-color;
-    color:$color-white;
+    background-color: $button-background-color;
+    color: $color-white;
     border-radius: 42%;
-    font-size:16px;
-    width:26px;
+    font-size: 16px;
+    width: 26px;
     text-align: center;
-    display:inline-block;
+    display: inline-block;
   }
 
   .add-button {
@@ -41,8 +41,8 @@ $button-background-color: #82a70c;
     letter-spacing: 0px;
     color: #ffffff;
     opacity: 1;
-    background:$button-background-color 0% 0% no-repeat padding-box;
-    border:none;
+    background: $button-background-color 0% 0% no-repeat padding-box;
+    border: none;
     border-radius: 5px;
     padding: 5px 18px;
     outline: none;
@@ -64,21 +64,22 @@ $button-background-color: #82a70c;
   min-width: 800px;
 }
 
-td, th {
+td,
+th {
   text-align: left;
   padding: 5px 8px;
 }
 
 th {
-  background: #42515F 0% 0% no-repeat padding-box;
+  background: #42515f 0% 0% no-repeat padding-box;
   text-align: left;
   font: normal normal medium 18px/24px Roboto;
   letter-spacing: 0px;
-  color:#FFFFFF;
+  color: #ffffff;
   text-transform: uppercase;
   opacity: 1;
   border: 0px solid #dddddd;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   height: 50px;
 }
 
@@ -109,7 +110,7 @@ td img {
 }
 
 .dept-label {
-  background: #E9FEA5 0% 0% no-repeat padding-box;
+  background: #e9fea5 0% 0% no-repeat padding-box;
   border-radius: 13px;
   width: auto;
   padding: 1px 7px;
